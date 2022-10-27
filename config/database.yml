@@ -26,8 +26,6 @@ development:
   database: football_development
   username: <%= Rails.application.credentials.username %>
   password: <%= Rails.application.credentials.password %>
-  port: <%= Rails.application.credentials.port || 5432 %>
-  # port: 5432
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -41,11 +39,11 @@ development:
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  # host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  # port: 5432
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -62,6 +60,8 @@ development:
 test:
   <<: *default
   database: football_test
+  username: <%= Rails.application.credentials.username %>
+  password: <%= Rails.application.credentials.password %>
 
 
 # As with config/credentials.yml, you never want to store sensitive information,
