@@ -3,13 +3,13 @@ class CreateMatches < ActiveRecord::Migration[7.0]
     create_table :matches do |t|
       t.datetime :match_date
       t.string :stage
-      t.bigint :home_team__id
+      t.bigint :home_team_id
       t.integer :home_team_score
-      t.bigint :visitor_team__id
+      t.bigint :visitor_team_id
       t.integer :visitor_team_score
       t.timestamps
     end
-    add_foreign_key :matches, :teams, column: :home_team__id
-    add_foreign_key :matches, :teams, column: :visitor_team__id
+    add_foreign_key :matches, :teams, column: :home_team_id
+    add_foreign_key :matches, :teams, column: :visitor_team_id
   end
 end
