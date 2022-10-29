@@ -6,15 +6,15 @@ default: &default
 
 development:
   <<: *default
-  database: football_development
-  username: <%= Rails.application.credentials.username %>
-  password: <%= Rails.application.credentials.password %>
+  database: <%= Rails.application.credentials.db[:database] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
 
 test:
   <<: *default
-  database: football_test
-  username: <%= Rails.application.credentials.username %>
-  password: <%= Rails.application.credentials.password %>
+  database: <%= Rails.application.credentials.db[:database] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
 
 production:
   <<: *default
