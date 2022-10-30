@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_161000) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_124847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "matches", force: :cascade do |t|
     t.datetime "match_date"
     t.string "stage"
-    t.bigint "home_team__id"
-    t.integer "home_team_score"
-    t.bigint "visitor_team__id"
-    t.integer "visitor_team_score"
+    t.bigint "home_team_id"
+    t.integer "home_team_score", default: 0
+    t.bigint "visitor_team_id"
+    t.integer "visitor_team_score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,6 +30,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_161000) do
     t.integer "visitor_team_score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "match_id"
+    t.bigint "user_id"
+    t.index ["match_id"], name: "index_pools_on_match_id"
+    t.index ["user_id"], name: "index_pools_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -51,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_161000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "matches", "teams", column: "home_team__id"
-  add_foreign_key "matches", "teams", column: "visitor_team__id"
-  add_foreign_key "pools", "matches", column: "home_team_score"
-  add_foreign_key "pools", "matches", column: "visitor_team_score"
+  add_foreign_key "matches", "teams", column: "home_team_id"
+  add_foreign_key "matches", "teams", column: "visitor_team_id"
+  add_foreign_key "pools", "matches"
+  add_foreign_key "pools", "users"
 end

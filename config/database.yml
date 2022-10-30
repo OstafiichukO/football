@@ -6,21 +6,21 @@ default: &default
 
 development:
   <<: *default
-  database: <%= Rails.application.credentials.db[:database] %>
+  database: football_davelopment
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
 
 test:
   <<: *default
-  database: <%= Rails.application.credentials.db[:database] %>
+  database: football_test
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
 
-production:
-  <<: *default
-  database: football_production
-  username: football
-  password: <%= ENV["FOOTBALL_DATABASE_PASSWORD"] %>
+# production:
+#   <<: *default
+#   database: football_production
+#   username: football
+#   password: <%= ENV["FOOTBALL_DATABASE_PASSWORD"] %>
 
 # PostgreSQL. Versions 9.3 and up are supported.
 #

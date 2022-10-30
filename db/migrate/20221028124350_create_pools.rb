@@ -6,7 +6,7 @@ class CreatePools < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_foreign_key :pools, :matches, column: :home_team_score
-    add_foreign_key :pools, :matches, column: :visitor_team_score
+    add_reference :pools, :match, foreign_key: true
+    add_reference :pools, :user, foreign_key: true
   end
 end
