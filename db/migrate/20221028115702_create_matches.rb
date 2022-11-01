@@ -4,9 +4,9 @@ class CreateMatches < ActiveRecord::Migration[7.0]
       t.datetime :match_date
       t.string :stage
       t.bigint :home_team_id
-      t.integer :home_team_score
+      t.integer :home_team_score, :default => 0
       t.bigint :visitor_team_id
-      t.integer :visitor_team_score
+      t.integer :visitor_team_score, :default => 0
       t.timestamps
     end
     add_foreign_key :matches, :teams, column: :home_team_id
