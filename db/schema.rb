@@ -16,10 +16,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_124350) do
 
   create_table "matches", force: :cascade do |t|
     t.datetime "match_date"
-    t.string "stage"
+    t.integer "stage", default: 0
     t.bigint "home_team_id"
-    t.integer "home_team_score", default: 0
     t.bigint "visitor_team_id"
+    t.integer "home_team_score", default: 0
     t.integer "visitor_team_score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
