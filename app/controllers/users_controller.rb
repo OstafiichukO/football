@@ -6,9 +6,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def send_points_email
+  def send_email
     user = User.find(params[:id])
-    PointsMailer.with(points: user.points, email: user.email).send.deliver_now
+    PointsMailer.with(points: user.points, email: user.email).send_email.deliver_now
   end
   # GET /users/1 or /users/1.json
   def show 
