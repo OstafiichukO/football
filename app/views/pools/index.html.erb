@@ -1,0 +1,29 @@
+<h1>My bets</h1>
+
+<div id="pools">
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Bet date</th>
+        <th scope="col">Match date</th>
+        <th scope="col">Home team | Visitor team</th>
+        <th scope="col">Visitor team score:</th>
+        <th scope="col">Visitor team:</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+      <% @pools.each do |pool| %>
+        <tr>
+          <td><%= pool.created_at %></td>
+          <td><%= pool.match.match_date %></td>
+          <td><%= pool.match.home_team.name %> vs <%= pool.match.visitor_team.name %></td>
+          <td><%= pool.home_team_score %></td>
+          <td><%= pool.visitor_team_score %></td>
+        </tr>
+      <% end %>
+  </table>
+  <%= link_to "New pool", new_pool_path, class:"btn btn-secondary" %>
+</div>
+<br/>
+<br/>

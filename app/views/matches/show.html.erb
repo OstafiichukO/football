@@ -1,0 +1,11 @@
+<div class="col-md-6">
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <h2><%= @match.home_team.name %> (<%= @match.home_team_score %>) - (<%= @match.visitor_team_score %>) <%= @match.visitor_team.name %></h2>
+    <h4>Date: <%= @match.match_date %></h3>
+    <p>Stage: <%= @match.stage %></p>
+    <br/>
+    <%= link_to "Edit", edit_match_path(@match), class:"btn btn-outline-secondary" %> | <%= link_to "Back to matches", matches_path, class:"btn btn-outline-secondary" %>
+  </div>
+</div>
+
+

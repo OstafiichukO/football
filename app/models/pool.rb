@@ -11,15 +11,15 @@ class Pool < ApplicationRecord
 
   def points
     if (match.home_team_score == match.visitor_team_score && home_team_score == visitor_team_score)
-      points = 1
+      1
     elsif (match.home_team_score > match.visitor_team_score && home_team_score > visitor_team_score)
-      points = 2
+      2
     elsif (match.visitor_team_score > match.home_team_score && visitor_team_score > match.visitor_team_score)
-      points = 2  
-    elsif (match.home_team_score == home_team_score  && match.visitor_team_score == visitor_team_score)
-      points = 3 
+      2  
+    elsif (match.home_team_score == home_team_score && match.visitor_team_score == visitor_team_score)
+      3 
     else
-      points = 0    
+      0    
     end
   end
 end

@@ -1,0 +1,14 @@
+<tbody id="<%= dom_id match %>">
+  <tr>
+    <td><%= match.id %></td>
+    <td><%= match.match_date %></td>
+    <td><%= match.stage %></td>
+    <td><%= match.home_team.name %></td>
+    <td><%= match.home_team_score %></td>
+    <td><%= match.visitor_team_score %></td>
+    <td><%= match.visitor_team.name %></td>
+    <td><%= link_to "Show", match, class:"btn btn-light btn-sm", style:"width: 100%; height: 100%;"%></td>
+    <td><%= link_to "Edit", edit_match_path(match), class:"btn btn-light btn-sm", style:"width: 100%; height: 100%;" %></td>
+    <td><%= button_to "Destroy", match, method: :delete, class:"btn btn-light btn-sm", style:"width: 100%; height: 100%;" %></td>
+  </tr>
+</tbody>

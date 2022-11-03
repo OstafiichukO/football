@@ -6,8 +6,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def send_points_email
+    user = User.find(params[:id])
+    PointsMailer.with(points: user.points, email: user.email).send.deliver_now
+  end
   # GET /users/1 or /users/1.json
-  def show
+  def show 
   end
 
   # GET /users/new
@@ -56,6 +60,7 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

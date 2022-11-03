@@ -1,0 +1,23 @@
+<h1>Teams</h1>
+
+<div id="teams">
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col"><%= link_to "Name:", :sort => "name" %></th>
+        <th>Team logo:</th>
+        <th>Players</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    
+      <% @teams.each do |team| %>
+        <%= render team %>
+      <% end %>
+  </table>
+</div>
+
+<%= link_to "New team", new_team_path, class:"btn btn-secondary" %>
+<br/>
+<br/>

@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
-  get 'users/index'
-  root 'users#index'
+  # root 'matches#index'
+
+  authenticated :user do
+    resources :teams
+    resources :matches
+    resources :pools
+    resources :users
+    root to: redirect("/matches"), as: :home
+  end
+
+  unauthenticated :user do
+    root to: redirect("/users/sign_in"), as: :login
+  end
 end

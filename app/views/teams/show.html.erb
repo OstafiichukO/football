@@ -1,0 +1,25 @@
+<%# <%= render @team %>
+<div id="<%= dom_id @team %>">
+  <h3><%= @team.name %></h3>
+
+  </br>
+  <% if @team.logo.attached? %> 
+    <p><%= image_tag @team.logo.attachment, :size => "260x260" %></p>
+  <%else%> 
+    <p>No logo</p>
+  <% end %>
+  <% if @team.players.attached? %> 
+    <p><%= image_tag @team.players.attachment, :size => "260x180" %></p> 
+  <%else%> 
+    <p>No players photo</p>
+  <% end %>
+  </br>
+  <div>
+   <%= link_to "Back to teams", teams_path, class:"btn btn-secondary" %> | <%= link_to "Edit", edit_team_path(@team), class:"btn btn-secondary"  %>
+   </br>
+   </br>
+    <%= button_to "Destroy this team", @team, method: :delete, class:"btn btn-danger" %>  
+  </div>
+
+  
+</div>

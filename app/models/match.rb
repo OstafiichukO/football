@@ -1,41 +1,43 @@
 class Match < ApplicationRecord
-  enum :stage, [:not_finished, :finished]
+  enum :stage, [:preparation, :finished]
   has_many :pools
   has_many :users
   
   belongs_to :home_team, class_name: "Team", foreign_key: "home_team_id"
   belongs_to :visitor_team, class_name: "Team", foreign_key: "visitor_team_id"
 
-  after_update :calculate
+  # after_update :CalculatePointsJob
 
   def points
     if (match.home_team_score == match.visitor_team_score && home_team_score == visitor_team_score)
-      points = 1
+      1
     elsif (match.home_team_score > match.visitor_team_score && home_team_score > visitor_team_score)
-      points = 2
+      2
     elsif (match.visitor_team_score > match.home_team_score && visitor_team_score > match.visitor_team_score)
-      points = 2  
+      2  
     elsif (match.home_team_score == home_team_score  && match.visitor_team_score == visitor_team_score)
-      points = 3 
+      3 
     else
-      points = 0    
+      0    
     end
   end
 
-  def calculate 
-    if match.stage == 1
-      users = User.all
-      users.each do |user|
-      points = 0
-      user_pools = Pool.where(user: user)
-      user_pools.each do |pool|
-        points = points + pool.points
-      end
-      user.points = points
-      user.save
-    end
-  end
-end
+  # def calculate 
+  #   @users = User.where(pool.user_id: match.id)
+  #   # @pool = Pool.where(user: current_user)
+  #   if (match.stage == finished)
+  #     @users = User.all
+  #     @users.each do |user|
+  #       points = 0
+  #       user_pools = Pool.where(user: user)
+  #         user_pools.each do |pool|
+  #           points = points + pool.points
+  #         end
+  #       user.points = points
+  #       user.save
+  #     end
+  #   end
+  # end
 end
 
   # Match.users

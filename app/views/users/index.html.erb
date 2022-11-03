@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Users</h1>
+<h2>Current leader is "<%= User.where(points: User.maximum("points")).pluck(:email).join() %>" with <%= User.maximum("points") %> points!</h2>
 
 <div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col"><%= link_to "Email:", :sort => "email" %></th>
+        <th scope="col"><%= link_to "Points:", :sort => "points" %></th>
+        <th></th>
+        <%# <th></th> %>
+        <%# <th></th> %>
+      </tr>
+    </thead>
+      <% @users.each do |user| %>
+        <%= render user %>
+      <% end %>
+  </table>
 </div>
-
-<%= link_to "New user", new_user_path %>
+<br/>
+<br/>
+<%# <%= link_to "New user", new_user_path, class:"btn btn-secondary" %>

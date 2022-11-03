@@ -1,0 +1,17 @@
+<tbody id="<%= dom_id team %>">
+  <tr>
+    <td><%= team.name %></td>
+    <% if team.logo.attached? %> 
+    <td><%= image_tag team.logo.attachment, :size => "80x80" %></td>
+    <%else%> 
+    <td></td>
+    <% end %>
+    <% if team.players.attached? %> 
+    <td><%= image_tag team.players.attachment, :size => "80x60" %></td> 
+    <%else%> 
+    <td></td>
+    <% end %>
+    <td><%= link_to "Show", team, class:"btn btn-light btn-sm", style:"width: 100%; height: 100%;"%></td>
+    <td><%= link_to "Edit", edit_team_path(team), class:"btn btn-light btn-sm", style:"width: 100%; height: 100%;" %></td>
+  </tr>
+</tbody>

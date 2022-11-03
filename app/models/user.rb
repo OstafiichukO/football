@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable
         #  , :validatable
   has_many :pools
-  belongs_to :users
+  # belongs_to :users
 end

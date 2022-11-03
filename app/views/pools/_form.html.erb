@@ -1,0 +1,36 @@
+<%= form_with(model: pool) do |form| %>
+  <% if pool.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pool.errors.count, "error") %> prohibited this pool from being saved:</h2>
+
+      <ul>
+        <% pool.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br/>
+  <div class="field form-group">
+    <%=  'Matches: ' %>
+    <%= select(:pool, :match_id, Match.all.collect {|match| [ "#{match.home_team.name} vs #{match.visitor_team.name}", match.id ] }, { include_blank: false })  %>
+  </div>
+
+  <br>
+  
+  <div class="field form-group">
+    <%= form.label "Home team goals" %><br>
+    <%= form.number_field :home_team_score, class:"form-control" %>
+  </div>
+
+  <br>
+
+  <div class="field form-group">
+    <%= form.label "Visitor team goals" %><br>
+    <%= form.number_field :visitor_team_score, class:"form-control" %>
+  </div>
+  <br/>
+  <div>
+    <%= form.submit "Create pool", class:"btn btn-primary" %>
+  </div>
+<% end %>
