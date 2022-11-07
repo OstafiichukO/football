@@ -53,6 +53,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
+group :development, :test do
+  gem "faker", "~> 2.23"
+  gem 'rspec-rails'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
@@ -61,9 +66,7 @@ group :development do
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
-
-  gem "faker", "~> 2.23"
+  # gem "spring
 end
 
 group :test do
@@ -72,6 +75,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 
+  gem 'factory_bot_rails'
 end
 
 gem "devise", "~> 4.8"
