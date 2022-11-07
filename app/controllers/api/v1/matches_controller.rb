@@ -3,9 +3,19 @@ require_relative "./application_api_controller"
 class Api::V1::MatchesController < ApplicationApiController  
   # GET /matches or /matches.json (or xml)
   def index
-    @matches = Match.all
+    # @matches = Match.all
+    @matches = Match.all.map do |match| 
+      match.attributes.merge({
+        home_team: match.home_team.name, 
+        visitor_team: match.visitor_team.name 
+      })
+    end
+    # join tables
+
     # render json: @matches, include: [:pools], only: [:stage, :home_team_id, :visitor_team_id, ], status: 200
-    @matches_teams = @matches.collect {|match| [ "#{match.home_team.name} vs #{match.visitor_team.name}", match.id ] }
+
+    # @matches_teams = @matches.collect {|match| [ "#{match.home_team.name} vs #{match.visitor_team.name}"] }
+    
     respond_to do |format|
       format.json { render json: @matches, status: 200 }
       format.xml { render xml: @matches, status: 200 }
@@ -25,10 +35,10 @@ class Api::V1::MatchesController < ApplicationApiController
   def create
     @match = Match.new(match_params)
 
-    if(@match.home_team_id == @match.visitor_team_id)
-      render error: { error: "Ф team cannot play against itself"}, status: 400 
-      return
-    end 
+    # if(@match.home_team_id == @match.visitor_team_id)
+    #   render error: { error: "A team cannot play against itself"}, status: 400 
+    #   return
+    # end 
 
     respond_to do |format|
       if @match.save

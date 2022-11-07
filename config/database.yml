@@ -15,6 +15,10 @@ test:
   database: football_test
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
+  # database: 
+  #   :name: football_test
+  #   :username: <%= Rails.application.credentials.db[:username] %>
+  #   :password: <%= Rails.application.credentials.db[:password] %>
 
 # production:
 #   <<: *default
