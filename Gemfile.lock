@@ -96,11 +96,6 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     erubi (1.11.0)
-    factory_bot (6.2.1)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
-      railties (>= 5.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
     gem_calculating (0.1.3)
@@ -117,6 +112,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.5.0)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.8.1)
@@ -249,15 +245,16 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
   devise (~> 4.8)
-  factory_bot_rails
   faker (~> 2.23)
   gem_calculating (~> 0.1.3)
   importmap-rails
   jbuilder
+  jwt (~> 2.5)
   letter_opener
   pg (~> 1.1)
   puma (~> 5.0)

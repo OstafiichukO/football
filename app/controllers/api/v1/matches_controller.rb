@@ -1,6 +1,6 @@
 require_relative "./application_api_controller"
-
-class Api::V1::MatchesController < ApplicationApiController  
+class Api::V1::MatchesController < ApplicationController 
+    # before_action :authorize_request 
   # GET /matches or /matches.json (or xml)
   def index
     # @matches = Match.all
@@ -13,9 +13,7 @@ class Api::V1::MatchesController < ApplicationApiController
     # join tables
 
     # render json: @matches, include: [:pools], only: [:stage, :home_team_id, :visitor_team_id, ], status: 200
-
     # @matches_teams = @matches.collect {|match| [ "#{match.home_team.name} vs #{match.visitor_team.name}"] }
-    
     respond_to do |format|
       format.json { render json: @matches, status: 200 }
       format.xml { render xml: @matches, status: 200 }
@@ -91,9 +89,4 @@ class Api::V1::MatchesController < ApplicationApiController
       end
     end
   end
-
-  private
-    def match_params
-      params.fetch(:match, {}).permit(:match_date, :stage, :home_team_id, :visitor_team_id, :home_team_score, :visitor_team_score)
-    end
 end

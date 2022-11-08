@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { session: 'users/sessions', registrations: 'users/registrations'}
   root 'matches#index'
+
+  get '/get_token', to: 'application#get_token'
+  post '/authorize_request', to: 'application#authorize_request'
   
   authenticated :user do
     resources :teams
@@ -23,6 +26,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :matches 
+      resources :users
+      resources :pools
+      resources :teams
     end
   end
 
