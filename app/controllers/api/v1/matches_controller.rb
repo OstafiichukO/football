@@ -1,6 +1,6 @@
 require_relative "./application_api_controller"
 class Api::V1::MatchesController < ApplicationController 
-    # before_action :authorize_request 
+
   # GET /matches or /matches.json (or xml)
   def index
     # @matches = Match.all
@@ -10,8 +10,8 @@ class Api::V1::MatchesController < ApplicationController
         visitor_team: match.visitor_team.name 
       })
     end
-    # join tables
 
+    # join tables
     # render json: @matches, include: [:pools], only: [:stage, :home_team_id, :visitor_team_id, ], status: 200
     # @matches_teams = @matches.collect {|match| [ "#{match.home_team.name} vs #{match.visitor_team.name}"] }
     respond_to do |format|
@@ -33,10 +33,10 @@ class Api::V1::MatchesController < ApplicationController
   def create
     @match = Match.new(match_params)
 
-    # if(@match.home_team_id == @match.visitor_team_id)
-    #   render error: { error: "A team cannot play against itself"}, status: 400 
-    #   return
-    # end 
+    if(@match.home_team_id == @match.visitor_team_id)
+      render error: { error: "A team cannot play against itself"}, status: 400 
+      return
+    end 
 
     respond_to do |format|
       if @match.save
@@ -52,13 +52,13 @@ class Api::V1::MatchesController < ApplicationController
   def update
     @match = Match.find(params[:id])
 
-    # if(match_params[:home_team_id] == match_params[:visitor_team_id])
-    #   respond_to do |format|
-    #     format.json { render json: @match.errors, status: :unprocessable_entity }
-    #     format.xml { render xml: @match.errors, status: :unprocessable_entity }
-    #   end  
-    #   return
-    # end 
+    if(match_params[:home_team_id] == match_params[:visitor_team_id])
+      respond_to do |format|
+        format.json { render json: @match.errors, status: :unprocessable_entity }
+        format.xml { render xml: @match.errors, status: :unprocessable_entity }
+      end  
+      return
+    end 
          
     respond_to do |format|
       if @match

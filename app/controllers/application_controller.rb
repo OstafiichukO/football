@@ -2,19 +2,15 @@ class ApplicationController < ActionController::Base
   require 'jwt'
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authorize_request 
-
-  def login_params
-    params.fetch(:user, {})
-  end
+  skip_before_action :authorize_request, only: [:get_token]
+  # protect_from_forgery with: :null_session
 
   def get_token
-    # puts login_params[:email]
     current_user = User.find_by(email: login_params[:email] )
-    # puts current_user
     payload = {}
     hmac_secret = Rails.application.credentials.hmac_secret
     iat = Time.now.to_i
-    exp = Time.now.to_i + 60
+    exp = Time.now.to_i + 3600
     payload[:iat] = iat
     payload[:exp] = exp
     payload[:email] = current_user.email
@@ -46,4 +42,9 @@ class ApplicationController < ActionController::Base
       render json: { errors: e.message }, status: :unauthorized  
     end
   end
+
+  private
+    def login_params
+      params.fetch(:user, {})
+    end
 end
