@@ -1,6 +1,6 @@
 require_relative "./application_api_controller"
-class Api::V1::MatchesController < ApplicationController 
-
+# include ActionController::MimeResponds
+class Api::V1::MatchesController < Api::V1::ApplicationApiController 
   # GET /matches or /matches.json (or xml)
   def index
     # @matches = Match.all
@@ -43,24 +43,20 @@ class Api::V1::MatchesController < ApplicationController
         format.json  { render json: @match }
         format.xml  { render xml: @match }
       else
-        render error: { error: "Unable to create Match"}, status: 400
+        format.json { render json: @match.errors, status: :unprocessable_entity }
+        # render error: { error: "Unable to create Match"}, status: 400
       end
     end
   end
 
   # PATCH/PUT /matches/:id or /matches/:id.json (or xml)
   def update
-    @match = Match.find(params[:id])
-
-    if(match_params[:home_team_id] == match_params[:visitor_team_id])
-      respond_to do |format|
-        format.json { render json: @match.errors, status: :unprocessable_entity }
-        format.xml { render xml: @match.errors, status: :unprocessable_entity }
-      end  
-      return
-    end 
-         
+    @match = Match.find(params[:id])         
     respond_to do |format|
+      # if(match_params[:home_team_id] == match_params[:visitor_team_id])
+      #   format.json { render json: @match.errors, status: :unprocessable_entity }
+      #   format.xml { render xml: @match.errors, status: :unprocessable_entity }
+      # end
       if @match
         @match.update(match_params)
         format.json { render json: { message: "Match successfully updated!" }, status: 200 }
@@ -70,6 +66,7 @@ class Api::V1::MatchesController < ApplicationController
         format.xml { render xml: { error: "Unable to update Match" }, status: 400 }
       end
     end
+    
     if(match_params[:stage] == "finished")
       CalculatePointsJob.perform_later()
     end
@@ -88,5 +85,10 @@ class Api::V1::MatchesController < ApplicationController
         format.xml { render xml: { error: "Unable to delete Match" }, status: 400 }
       end
     end
+  end
+
+  private
+  def match_params
+        params.fetch(:match, {}).permit(:match_date, :stage, :home_team_id, :visitor_team_id, :home_team_score, :visitor_team_score)
   end
 end

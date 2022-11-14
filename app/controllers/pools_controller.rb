@@ -57,7 +57,7 @@ class PoolsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pool_params
-      params.require(:pool).permit(:home_team_score, :visitor_team_score, :match_id, :user_id)
+      params.require(:pool).permit(:home_team_score, :visitor_team_score, :match_id)
     end
 
 end

@@ -64,6 +64,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring
+  gem "letter_opener"
 end
 
 group :test do
@@ -71,9 +72,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "factory_bot_rails"
 end
 
 gem "devise", "~> 4.8"
 gem "gem_calculating", "~> 0.1.3"
-gem "letter_opener", group: :development
 gem "jwt", "~> 2.5"

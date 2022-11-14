@@ -6,6 +6,8 @@ class Match < ApplicationRecord
   belongs_to :home_team, class_name: "Team", foreign_key: "home_team_id"
   belongs_to :visitor_team, class_name: "Team", foreign_key: "visitor_team_id"
 
+  validates :match_date, presence: true
+  validates :home_team_id, comparison: { other_than: :visitor_team_id}
   # after_update :CalculatePointsJob
 
   def points
